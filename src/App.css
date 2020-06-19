@@ -1,11 +1,20 @@
+.grid {
+  width: 200px;
+  margin: auto;
+}
+  
 .box {
   display: inline-block;       
-  border: 1px solid black;
-  width: 15px;
-  height: 15px;
+  border: 1px solid darkgray;
+  width: 20px;
+  height: 20px;
   margin-left: -1px;
   margin-bottom: -1px;
   }
+
+.box:hover { 
+  background: yellow;
+}
 
 .off {
   background-color: lightgray;
@@ -14,22 +23,4 @@
 .on {
   background-color: green;
 }
-  
-.box:hover { 
-  background: #00CCFF;
-}
 
-.center {
-  margin: auto;
-  display: table;
-  margin-top: 10px;
-}
-
-.grid {
-  width: 150px;
-  line-height: 0;
-  margin: auto;
-  box-shadow: 0px 0px 20px white;
-  margin-top: 20px;
-}
-  
