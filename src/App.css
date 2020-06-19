@@ -1,7 +1,3 @@
-body {
-  background-image: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/squares.png) 
-}
-  
 .box {
   display: inline-block;       
   border: 1px solid black;
@@ -37,14 +33,3 @@ body {
   margin-top: 20px;
 }
   
-h1, h2, h3, h4 {
-  color: white;
-  margin: auto;
-  text-align: center;
-  width: 50%;
-  margin-top: 10px;
-}
-
-h4 {
-  margin-top: 0px;
-}
