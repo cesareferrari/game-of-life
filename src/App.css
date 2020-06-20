@@ -1,6 +1,5 @@
 .grid {
-  width: 200px;
-  margin: auto;
+  width: calc(30 * 21px);
 }
   
 .box {
