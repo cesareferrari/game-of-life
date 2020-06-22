@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "./box";
+import Cell from "./cell";
 
 class Grid extends React.Component {
   render() {
@@ -7,17 +7,17 @@ class Grid extends React.Component {
 
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.cols; j++) {
-        let boxClass = this.props.grid[i][j] ? "box on" : "box off";
-        let boxId = `box-${i}-${j}`;
+        let cellClass = this.props.grid[i][j] ? "cell on" : "cell off";
+        let cellId = `cell-${i}-${j}`;
 
         gridDisplay.push(
-          <Box
-            boxClass={boxClass}
-            key={boxId}
-            id={boxId}
+          <Cell
+            cellClass={cellClass}
+            key={cellId}
+            id={cellId}
             row={i}
             col={j}
-            selectBox={this.props.selectBox}
+            selectCell={this.props.selectCell}
           />
         );
       }
