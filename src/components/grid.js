@@ -3,21 +3,28 @@ import Cell from "./cell";
 
 class Grid extends React.Component {
   render() {
+    // gridDisplay ia an array that displays the grid, 
+    // grid is defined in Game component and is
+    // passed into this Grid component through the props
     const gridDisplay = [];
 
+    // build an array based on the rows and cols passed in the props
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.cols; j++) {
+        // if cell in `grid` is true, class will be "on", otherwise class is "off"
         let cellClass = this.props.grid[i][j] ? "cell on" : "cell off";
+        // id based on row and col index
         let cellId = `cell-${i}-${j}`;
 
+        // add the Cell component to each element in the array that's being created
         gridDisplay.push(
           <Cell
-            cellClass={cellClass}
-            key={cellId}
+            cellClass={cellClass} // class name
+            key={cellId}  // id
             id={cellId}
             row={i}
             col={j}
-            selectCell={this.props.selectCell}
+            selectCell={this.props.selectCell}  // so we can select cell
           />
         );
       }
