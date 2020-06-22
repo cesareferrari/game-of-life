@@ -3,7 +3,11 @@ import "./App.css";
 import Game from "./components/game";
 
 const App = () => {
-  return <Game />
+  return (
+    <div className="App">
+      <Game />
+    </div>
+  )
 }
 
 export default App;
