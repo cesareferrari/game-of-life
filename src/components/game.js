@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from "./grid";
+import Buttons from "./buttons";
 
 // TODO change name
 function arrayClone(arr) {
@@ -64,19 +65,31 @@ class Game extends React.Component {
 
   pauseButton = () => {
     clearInterval(this.intervalId);
-  }
+  };
+
+  clearButton = () => {
+    let g = Array(this.rows)
+      .fill()
+      .map(() => Array(this.cols).fill(false));
+
+    this.setState({
+      grid: g,
+      generation: 0
+    })
+  };
+
+  seedButton = () => {};
 
   // plays the game
   // TODO add the double buffer here?
   play = () => {
-    let g = this.state.grid
-    let g2 = arrayClone(this.state.grid)
+    let g = this.state.grid;
+    let g2 = arrayClone(this.state.grid);
 
     // Game logic
     // go through every element in the grid
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-
         // how many neighbors
         let count = 0;
 
@@ -100,8 +113,8 @@ class Game extends React.Component {
     this.setState({
       grid: g2,
       generation: this.state.generation + 1
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.seed();
@@ -112,6 +125,12 @@ class Game extends React.Component {
     return (
       <div className="App">
         <h1>Game of life</h1>
+        <Buttons
+          playButton={this.playButton}
+          pauseButton={this.pauseButton}
+          clearButton={this.clearButton}
+          seed={this.seed}
+        />
 
         <Grid
           grid={this.state.grid}
