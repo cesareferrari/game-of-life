@@ -3,8 +3,11 @@ import Grid from "./grid";
 import Buttons from "./buttons";
 import cloneGrid from "../helpers/clone-grid";
 import createGrid from "../helpers/create-grid";
+import stepGame from "../helpers/step-game";
 
 class Game extends React.Component {
+
+  // TODO do I really need a constructor? Don' remember
   constructor() {
     super();
 
@@ -24,8 +27,10 @@ class Game extends React.Component {
     // make a copy of the data grid and assign it to another variable
     // TODO make extract out into its own function
     let g = cloneGrid(this.state.grid);
+
     // find the cell that corresponds to row and col
     // set it to the opposite value
+    // maybe I can set this in the cell state?
     g[row][col] = !g[row][col];
     // update the state using the clone
     this.setState({
@@ -33,6 +38,8 @@ class Game extends React.Component {
     });
   };
 
+
+  // Init randomly
   initGrid = () => {
     let g = cloneGrid(this.state.grid);
 
@@ -61,130 +68,24 @@ class Game extends React.Component {
     clearInterval(this.intervalId);
   };
 
+  // initialize world
   clearButton = () => {
-    let g = Array(this.rows)
-      .fill()
-      .map(() => Array(this.cols).fill(false));
-
     this.setState({
-      grid: g,
+      grid: createGrid(this.rows, this.cols),
       generation: 0
     })
   };
 
+  // TODO do I need this?
   seedButton = () => {};
 
   // plays the game
   // TODO add the double buffer here?
   play = () => {
-    let g = this.state.grid;
-    let g2 = cloneGrid(this.state.grid);
-
-    // Game logic
-    // go through every element in the grid
-    // for (let i = 0; i < this.rows; i++) {
-    //   for (let j = 0; j < this.cols; j++) {
-    //     // how many neighbors
-    //     let count = 0;
-
-    //     if (i > 0) if (g[i - 1][j]) count++; // 1
-    //     if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++; // 2
-    //     if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++; // 3
-    //     if (j < this.cols - 1) if (g[i][j + 1]) count++; // 4
-    //     if (j > 0) if (g[i][j - 1]) count++; // 5
-    //     if (i < this.rows - 1) if (g[i + 1][j]) count++;  // 6
-    //     if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;  // 7
-    //     if (i < this.rows - 1 && this.cols - 1) if (g[i + 1][j + 1]) count++; // 8
-
-    //     // cell dies
-    //     if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false;
-
-    //     // cell lives
-    //     if (!g[i][j] && count === 3) g2[i][j] = true;
-    //   }
-    // }
-
-
-    // logic 2
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.cols; j++) {
-        let neighbors = 0;
-
-        // 1
-        if (i > 0) {
-          if (g[i - 1][j]) {
-            neighbors += 1
-          }
-        }
-
-        // 2
-        if (i > 0 && j > 0) {
-          if (g[i - 1][j - 1]) {
-            neighbors += 1
-          }
-        }
-
-        // 3
-        if (i > 0 && j < this.cols - 1) {
-          if (g[i - 1][j + 1]) {
-            neighbors += 1
-          }
-        }
-
-        // 4
-        if (j < this.cols - 1) {
-          if (g[i][j + 1]) {
-            neighbors += 1
-          }
-        }
-
-        // 5 
-        if (j > 0) {
-          if (g[i][j - 1]) {
-            neighbors += 1
-          }
-        }
-
-        // 6
-        if (i < this.rows - 1) {
-          if (g[i + 1][j]) {
-            neighbors += 1
-          }
-        }
-
-        // 7
-        if (i < this.rows - 1 && j > 0) {
-          if (g[i + 1][j - 1]) {
-            neighbors += 1
-          }
-        }
-
-        // 8
-        if (i < this.rows - 1 && this.cols - 1) {
-          if (g[i + 1][j + 1]) {
-            neighbors += 1
-          }
-        }
-
-        // cell dies
-        if (g[i][j] && (neighbors < 2 || neighbors > 3)) {
-          g2[i][j] = false;
-        }
-
-        // cell lives
-        if (!g[i][j] && neighbors === 3) {
-          g2[i][j] = true;
-        }
-
-      }
-    }
-
-
-
-
+    let newGrid = stepGame(this.state.grid, this.rows, this.cols);
 
     this.setState({
-      grid: g2,
+      grid: newGrid,
       generation: this.state.generation + 1
     });
   };
