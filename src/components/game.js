@@ -2,11 +2,21 @@ import React from "react";
 import Grid from "./grid";
 import Buttons from "./buttons";
 
-// TODO change name
-function arrayClone(arr) {
-  // deep clone because it's a nested array
-  return JSON.parse(JSON.stringify(arr));
+// deep clone because it's a nested array
+const cloneGrid = (arr) => JSON.parse(JSON.stringify(arr));
+
+// Creates grid of data given rows and cols
+// Returns nested array of false objects
+const createGrid = (rows, cols) => {
+  let grid = [];
+
+  for (let i = 0; i < rows; i++) {
+    grid[i] = Array(cols).fill(false);
+  }
+
+  return grid;
 }
+
 
 class Game extends React.Component {
   constructor() {
@@ -14,22 +24,20 @@ class Game extends React.Component {
 
     this.speed = 100;
     this.rows = 30;
-    this.cols = 30;
+    this.cols = 20;
 
     // grid is the grid of cells, an array of arrays
     // initially the grid is filled with false objects
     this.state = {
       generation: 0,
-      grid: Array(this.rows)
-        .fill()
-        .map(() => Array(this.cols).fill(false))
+      grid: createGrid(this.rows, this.cols)
     };
   }
 
   selectCell = (row, col) => {
     // make a copy of the data grid and assign it to another variable
     // TODO make extract out into its own function
-    let gridCopy = arrayClone(this.state.grid);
+    let gridCopy = cloneGrid(this.state.grid);
     // find the cell that corresponds to row and col
     // set it to the opposite value
     gridCopy[row][col] = !gridCopy[row][col];
@@ -41,7 +49,7 @@ class Game extends React.Component {
 
   // TODO change name (maybe change and refactor out random function)
   seed = () => {
-    let gridCopy = arrayClone(this.state.grid);
+    let gridCopy = cloneGrid(this.state.grid);
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
         if (Math.floor(Math.random() * 4) === 1) {
@@ -84,7 +92,7 @@ class Game extends React.Component {
   // TODO add the double buffer here?
   play = () => {
     let g = this.state.grid;
-    let g2 = arrayClone(this.state.grid);
+    let g2 = cloneGrid(this.state.grid);
 
     // Game logic
     // go through every element in the grid
