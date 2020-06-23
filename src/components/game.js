@@ -33,9 +33,9 @@ class Game extends React.Component {
     });
   };
 
-  // TODO maybe change and refactor out random function
   initGrid = () => {
     let g = cloneGrid(this.state.grid);
+
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
         if (Math.floor(Math.random() * 6) === 1) {
@@ -82,27 +82,106 @@ class Game extends React.Component {
 
     // Game logic
     // go through every element in the grid
+    // for (let i = 0; i < this.rows; i++) {
+    //   for (let j = 0; j < this.cols; j++) {
+    //     // how many neighbors
+    //     let count = 0;
+
+    //     if (i > 0) if (g[i - 1][j]) count++; // 1
+    //     if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++; // 2
+    //     if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++; // 3
+    //     if (j < this.cols - 1) if (g[i][j + 1]) count++; // 4
+    //     if (j > 0) if (g[i][j - 1]) count++; // 5
+    //     if (i < this.rows - 1) if (g[i + 1][j]) count++;  // 6
+    //     if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;  // 7
+    //     if (i < this.rows - 1 && this.cols - 1) if (g[i + 1][j + 1]) count++; // 8
+
+    //     // cell dies
+    //     if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false;
+
+    //     // cell lives
+    //     if (!g[i][j] && count === 3) g2[i][j] = true;
+    //   }
+    // }
+
+
+    // logic 2
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        // how many neighbors
-        let count = 0;
+        let neighbors = 0;
 
-        if (i > 0) if (g[i - 1][j]) count++;
-        if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++;
-        if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++;
-        if (j < this.cols - 1) if (g[i][j + 1]) count++;
-        if (j > 0) if (g[i][j - 1]) count++;
-        if (i < this.rows - 1) if (g[i + 1][j]) count++;
-        if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;
-        if (i < this.rows - 1 && this.cols - 1) if (g[i + 1][j + 1]) count++;
+        // 1
+        if (i > 0) {
+          if (g[i - 1][j]) {
+            neighbors += 1
+          }
+        }
+
+        // 2
+        if (i > 0 && j > 0) {
+          if (g[i - 1][j - 1]) {
+            neighbors += 1
+          }
+        }
+
+        // 3
+        if (i > 0 && j < this.cols - 1) {
+          if (g[i - 1][j + 1]) {
+            neighbors += 1
+          }
+        }
+
+        // 4
+        if (j < this.cols - 1) {
+          if (g[i][j + 1]) {
+            neighbors += 1
+          }
+        }
+
+        // 5 
+        if (j > 0) {
+          if (g[i][j - 1]) {
+            neighbors += 1
+          }
+        }
+
+        // 6
+        if (i < this.rows - 1) {
+          if (g[i + 1][j]) {
+            neighbors += 1
+          }
+        }
+
+        // 7
+        if (i < this.rows - 1 && j > 0) {
+          if (g[i + 1][j - 1]) {
+            neighbors += 1
+          }
+        }
+
+        // 8
+        if (i < this.rows - 1 && this.cols - 1) {
+          if (g[i + 1][j + 1]) {
+            neighbors += 1
+          }
+        }
 
         // cell dies
-        if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false;
+        if (g[i][j] && (neighbors < 2 || neighbors > 3)) {
+          g2[i][j] = false;
+        }
 
         // cell lives
-        if (!g[i][j] && count === 3) g2[i][j] = true;
+        if (!g[i][j] && neighbors === 3) {
+          g2[i][j] = true;
+        }
+
       }
     }
+
+
+
+
 
     this.setState({
       grid: g2,
