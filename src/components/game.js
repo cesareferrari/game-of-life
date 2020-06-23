@@ -1,22 +1,8 @@
 import React from "react";
 import Grid from "./grid";
 import Buttons from "./buttons";
-
-// deep clone because it's a nested array
-const cloneGrid = (arr) => JSON.parse(JSON.stringify(arr));
-
-// Creates grid of data given rows and cols
-// Returns nested array of false objects
-const createGrid = (rows, cols) => {
-  let grid = [];
-
-  for (let i = 0; i < rows; i++) {
-    grid[i] = Array(cols).fill(false);
-  }
-
-  return grid;
-}
-
+import cloneGrid from "../helpers/clone-grid";
+import createGrid from "../helpers/create-grid";
 
 class Game extends React.Component {
   constructor() {
@@ -37,29 +23,29 @@ class Game extends React.Component {
   selectCell = (row, col) => {
     // make a copy of the data grid and assign it to another variable
     // TODO make extract out into its own function
-    let gridCopy = cloneGrid(this.state.grid);
+    let g = cloneGrid(this.state.grid);
     // find the cell that corresponds to row and col
     // set it to the opposite value
-    gridCopy[row][col] = !gridCopy[row][col];
-    // set the state using the clone
+    g[row][col] = !g[row][col];
+    // update the state using the clone
     this.setState({
-      grid: gridCopy
+      grid: g
     });
   };
 
-  // TODO change name (maybe change and refactor out random function)
-  seed = () => {
-    let gridCopy = cloneGrid(this.state.grid);
+  // TODO maybe change and refactor out random function
+  initGrid = () => {
+    let g = cloneGrid(this.state.grid);
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        if (Math.floor(Math.random() * 4) === 1) {
-          gridCopy[i][j] = true;
+        if (Math.floor(Math.random() * 6) === 1) {
+          g[i][j] = true;
         }
       }
     }
 
     this.setState({
-      grid: gridCopy
+      grid: g
     });
   };
 
@@ -125,8 +111,8 @@ class Game extends React.Component {
   };
 
   componentDidMount() {
-    this.seed();
-    this.playButton();
+    // this.initGrid();
+    // this.playButton();
   }
 
   render() {
@@ -137,7 +123,7 @@ class Game extends React.Component {
           playButton={this.playButton}
           pauseButton={this.pauseButton}
           clearButton={this.clearButton}
-          seed={this.seed}
+          seed={this.initGrid}
         />
 
         <Grid
