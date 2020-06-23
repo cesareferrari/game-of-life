@@ -1,9 +1,11 @@
 .grid {
+  display: flex;
+  flex-wrap: wrap;
   width: calc(30 * 21px);
 }
   
 .cell {
-  display: inline-block;       
+  display: block;       
   border: 1px solid darkgray;
   width: 20px;
   height: 20px;
@@ -12,7 +14,15 @@
   }
 
 .cell:hover { 
-  background: yellow;
+  background: darkgray;
+}
+
+.cell.on:hover {
+  background: darkgreen;
+}
+
+.cell:active {
+  background: black;
 }
 
 .off {
