@@ -40,7 +40,7 @@ class Game extends React.Component {
 
 
   // Init randomly
-  initGrid = () => {
+  initRandomGrid = () => {
     let g = cloneGrid(this.state.grid);
 
     for (let i = 0; i < this.rows; i++) {
@@ -56,28 +56,24 @@ class Game extends React.Component {
     });
   };
 
-  // TODO change name to play? startGame?
-  // associated with the play button that starts the game
-  playButton = () => {
-    // clear the interval that was created when played, start again
+  // starts the game
+  startGame = () => {
+    // clear the interval if there is one, start again
     clearInterval(this.intervalId);
     this.intervalId = setInterval(this.play, this.speed);
   };
 
-  pauseButton = () => {
+  pauseGame = () => {
     clearInterval(this.intervalId);
   };
 
   // initialize world
-  clearButton = () => {
+  clearGrid = () => {
     this.setState({
       grid: createGrid(this.rows, this.cols),
       generation: 0
     })
   };
-
-  // TODO do I need this?
-  seedButton = () => {};
 
   // plays the game
   // TODO add the double buffer here?
@@ -91,19 +87,20 @@ class Game extends React.Component {
   };
 
   componentDidMount() {
-    // this.initGrid();
-    // this.playButton();
+    // this.initRandomGrid();
+    // this.startGame();
   }
 
   render() {
     return (
-      <div className="App">
+      <div>
         <h1>Game of life</h1>
+
         <Buttons
-          playButton={this.playButton}
-          pauseButton={this.pauseButton}
-          clearButton={this.clearButton}
-          seed={this.initGrid}
+          startGame={this.startGame}
+          pauseGame={this.pauseGame}
+          clearGrid={this.clearGrid}
+          initRandomGrid={this.initRandomGrid}
         />
 
         <Grid
