@@ -67,6 +67,16 @@ class Game extends React.Component {
     clearInterval(this.intervalId);
   };
 
+  slowGame = () => {
+    this.speed = 500;
+    this.startGame();
+  };
+
+  fastGame = () => {
+    this.speed = 100;
+    this.startGame();
+  };
+
   // initialize world
   clearGrid = () => {
     this.setState({
@@ -101,6 +111,8 @@ class Game extends React.Component {
           pauseGame={this.pauseGame}
           clearGrid={this.clearGrid}
           initRandomGrid={this.initRandomGrid}
+          slowGame={this.slowGame}
+          fastGame={this.fastGame}
         />
 
         <Grid
