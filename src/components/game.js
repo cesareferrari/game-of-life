@@ -7,7 +7,6 @@ import stepGame from "../helpers/step-game";
 
 class Game extends React.Component {
 
-  // TODO do I really need a constructor? Don' remember
   constructor() {
     super();
 
@@ -25,7 +24,6 @@ class Game extends React.Component {
 
   selectCell = (row, col) => {
     // make a copy of the data grid and assign it to another variable
-    // TODO make extract out into its own function
     let g = cloneGrid(this.state.grid);
 
     // find the cell that corresponds to row and col
@@ -68,7 +66,7 @@ class Game extends React.Component {
   };
 
   slowGame = () => {
-    this.speed = 500;
+    this.speed = 300;
     this.startGame();
   };
 
