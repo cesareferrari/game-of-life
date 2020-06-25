@@ -5,14 +5,14 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  width: calc(30 * 21px);
+  width: calc(50 * 11px);
 }
   
 .cell {
   display: block;       
   border: 1px solid darkgray;
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   margin-left: -1px;
   margin-bottom: -1px;
   }

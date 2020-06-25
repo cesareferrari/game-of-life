@@ -5,18 +5,23 @@ import cloneGrid from "../helpers/clone-grid";
 import createGrid from "../helpers/create-grid";
 import stepGame from "../helpers/step-game";
 
+const FAST = 70;
+const SLOW = 300;
+
 class Game extends React.Component {
 
   constructor() {
     super();
 
-    this.speed = 70;
-    this.rows = 30;
-    this.cols = 25;
+    this.speed = FAST;
+    // this.slowSpeed = SLOW;
+    this.rows = 50;
+    this.cols = 30;
 
     // grid is the grid of cells, an array of arrays
     // initially the grid is filled with false objects
     this.state = {
+      // speed: FAST,
       generation: 0,
       grid: createGrid(this.rows, this.cols)
     };
@@ -66,12 +71,12 @@ class Game extends React.Component {
   };
 
   slowGame = () => {
-    this.speed = 300;
+    this.speed = SLOW;
     this.startGame();
   };
 
   fastGame = () => {
-    this.speed = 100;
+    this.speed = FAST;
     this.startGame();
   };
 
