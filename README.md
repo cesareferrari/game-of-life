@@ -1,3 +1,36 @@
+# Conway's Game of life
+
+## What are cellular automata and how they are useful in real life
+
+Cellular automata are a simulation of a universe divided into cells.
+Each cell has a finite number of states (ex.: on/off) that changes based on
+strict rules.
+Each cell also has neighbors, cells that surround it.  
+
+Cells start in an initial state and state is changed simultaneously for all
+cells to create successive generations.
+
+Cellular automata are useful in computer processors and cryptography.
+
+
+## Analyze the ‘Turing Completeness’ of Conway’s “Game of Life”
+
+A system of data-manipulation rules is said to be Turing complete if it can be
+used to simulate a Turing machine.
+A Turing machine is a matematical device that has 
+- a tape, divided into discrete cells, to hold input data and store results, 
+- a read/write head which reads and writes symbols on the tape, 
+- and a set of rules.
+
+The Game of life has the same structure, a grid of cells, a way to read and
+write the cell state, and a set of rules.
+
+
+## Implement a visualization of Conway’s “Game of Life” using technologies related to their specific track.
+
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
