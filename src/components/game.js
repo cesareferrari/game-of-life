@@ -14,7 +14,6 @@ class Game extends React.Component {
     super();
 
     this.speed = FAST;
-    // this.slowSpeed = SLOW;
     this.rows = 50;
     this.cols = 30;
 
@@ -89,7 +88,6 @@ class Game extends React.Component {
   };
 
   // plays the game
-  // TODO add the double buffer here?
   play = () => {
     let newGrid = stepGame(this.state.grid, this.rows, this.cols);
 
@@ -98,11 +96,6 @@ class Game extends React.Component {
       generation: this.state.generation + 1
     });
   };
-
-  componentDidMount() {
-    // this.initRandomGrid();
-    // this.startGame();
-  }
 
   render() {
     return (
