@@ -14,8 +14,8 @@ class Game extends React.Component {
     super();
 
     this.speed = FAST;
-    this.rows = 50;
-    this.cols = 30;
+    this.rows = 30;
+    this.cols = 50;
 
     // grid is the grid of cells, an array of arrays
     // initially the grid is filled with false objects
